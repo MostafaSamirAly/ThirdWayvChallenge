@@ -7,27 +7,66 @@
 
 import Foundation
 
+struct ProductsListViewModelActions {
+    let showProductDetails: (Product) -> Void
+    let showProductList: () -> Void
+}
+
+enum ProductsListViewModelLoading {
+    case fullScreen
+    case nextPage
+    case noLoading
+}
+
+protocol ProductsListViewModelInput {
+    func loadProducts(loading: ProductsListViewModelLoading)
+    func didLoadNextPage()
+}
+
+protocol MoviesListViewModelOutput {
+    var items: Observable<[Product]> { get }
+    var loading: Observable<ProductsListViewModelLoading?> { get }
+    var error: Observable<String> { get }
+    var isEmpty: Bool { get }
+}
+
+protocol ProductsListViewModel: ProductsListViewModelInput, MoviesListViewModelOutput { }
 
 
-class ProductListViewModel: NSObject {
-    weak var statePresenter: StatePresentable?
+final class DefaultProductsListViewModel: ProductsListViewModel {
+
     private var productListUseCase: ProductListUseCase
-    private(set) var products = [Product]()
+    private let actions: ProductsListViewModelActions?
     
-    init(productListUseCase: ProductListUseCase) {
+    var items: Observable<[Product]> = Observable([])
+    
+    var loading: Observable<ProductsListViewModelLoading?> = Observable(.none)
+    
+    var error: Observable<String> = Observable("")
+    
+    var isEmpty: Bool { return items.value.isEmpty }
+    
+    
+    init(productListUseCase: ProductListUseCase,
+         actions: ProductsListViewModelActions? = nil ) {
         self.productListUseCase = productListUseCase
+        self.actions = actions
     }
     
-    func loadProducts() {
-        statePresenter?.render(state: .loading)
+    func loadProducts(loading: ProductsListViewModelLoading) {
+        self.loading.value = loading
         productListUseCase.loadData(completion: { [weak self] result in
+            self?.loading.value = .noLoading
             switch result {
                 case .success(let value):
-                    self?.products = value
-                    self?.statePresenter?.render(state: .populated)
+                    self?.items.value.append(contentsOf: value)
                 case .failure(let error):
-                    self?.statePresenter?.render(state: .error(error))
+                    self?.error.value = error.localizedDescription
             }
         })
+    }
+    
+    func didLoadNextPage() {
+        loadProducts(loading: .nextPage)
     }
 }

@@ -9,31 +9,91 @@ import UIKit
 
 class ProductListViewController: UIViewController, AlertShower, LoadingShower {
     
-    let viewModel = ProductListViewModel(productListUseCase: ProductListProvider())
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        viewModel.statePresenter = self
-        viewModel.loadProducts()
-    }
-
-}
-
-
-extension ProductListViewController: StatePresentable {
-    func render(state: State) {
-        switch state {
-            case .loading:
-                showLoadingView()
-            case .error(let error):
-                showAlert(message: error.localizedDescription)
-            case .populated:
-                dismissLoadingView()
-            default:
-                break
-            
+    @IBOutlet weak var productsCollectionView: UICollectionView! {
+        didSet {
+            setupCollectionView()
         }
     }
     
+    let viewModel: ProductsListViewModel
+    
+    init(viewModel: ProductsListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        bindViewModel()
+        viewModel.loadProducts(loading: .fullScreen)
+        
+    }
+    
+
+}
+
+fileprivate extension ProductListViewController {
+    
+    func setupCollectionView() {
+        productsCollectionView.registerCellNib(cellClass: ProductCollectionViewCell.self)
+        productsCollectionView.delegate = self
+        productsCollectionView.dataSource = self
+                if let layout = productsCollectionView.collectionViewLayout as? PinterestLayout {
+                  layout.delegate = self
+                }
+        productsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func bindViewModel() {
+        viewModel.items.observe(on: self) { [weak self] _ in
+            self?.productsCollectionView.reloadData()
+        }
+        viewModel.loading.observe(on: self) { [weak self] in
+            switch $0 {
+                case .fullScreen:
+                    self?.showLoadingView()
+                case .noLoading:
+                    self?.dismissLoadingView()
+                case .nextPage:
+                    break
+                default:
+                    break
+            }
+        }
+        viewModel.error.observe(on: self) { [weak self] in
+            if !$0.isEmpty {
+                self?.showAlert(message: $0)
+            }
+        }
+    }
+}
+
+
+extension ProductListViewController: UICollectionViewDelegate {
+   
+}
+
+extension ProductListViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.items.value.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeue(indexPath: indexPath) as ProductCollectionViewCell
+        cell.configure(with: viewModel.items.value[indexPath.row])
+        return cell
+    }
+    
+}
+
+extension ProductListViewController: PinterestLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
+        return CGFloat(viewModel.items.value[indexPath.row].image.height)
+    }
     
 }

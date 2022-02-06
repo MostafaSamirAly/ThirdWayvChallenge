@@ -11,7 +11,7 @@ protocol ProductListUseCase {
     func loadData(completion: @escaping ((Result<[Product], NetworkError>) -> Void))
 }
 
-class ProductListProvider: ProductListUseCase {
+final class ProductListProvider: ProductListUseCase {
     
     func loadData(completion: @escaping ((Result<[Product], NetworkError>) -> Void)) {
         
