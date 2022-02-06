@@ -7,11 +7,6 @@
 
 import Foundation
 
-struct ProductsListViewModelActions {
-    let showProductDetails: (Product) -> Void
-    let showProductList: () -> Void
-}
-
 enum ProductsListViewModelLoading {
     case fullScreen
     case nextPage
@@ -20,7 +15,7 @@ enum ProductsListViewModelLoading {
 
 protocol ProductsListViewModelInput {
     func loadProducts(loading: ProductsListViewModelLoading)
-    func didLoadNextPage()
+    func loadNextPage()
 }
 
 protocol MoviesListViewModelOutput {
@@ -36,7 +31,6 @@ protocol ProductsListViewModel: ProductsListViewModelInput, MoviesListViewModelO
 final class DefaultProductsListViewModel: ProductsListViewModel {
 
     private var productListUseCase: ProductListUseCase
-    private let actions: ProductsListViewModelActions?
     
     var items: Observable<[Product]> = Observable([])
     
@@ -46,11 +40,11 @@ final class DefaultProductsListViewModel: ProductsListViewModel {
     
     var isEmpty: Bool { return items.value.isEmpty }
     
+    var shouldPaginate: Bool = true
     
-    init(productListUseCase: ProductListUseCase,
-         actions: ProductsListViewModelActions? = nil ) {
+    
+    init(productListUseCase: ProductListUseCase) {
         self.productListUseCase = productListUseCase
-        self.actions = actions
     }
     
     func loadProducts(loading: ProductsListViewModelLoading) {
@@ -58,15 +52,16 @@ final class DefaultProductsListViewModel: ProductsListViewModel {
         productListUseCase.loadData(completion: { [weak self] result in
             self?.loading.value = .noLoading
             switch result {
-                case .success(let value):
-                    self?.items.value.append(contentsOf: value)
+                case .success(let products):
+                    self?.items.value.append(contentsOf: products)
                 case .failure(let error):
                     self?.error.value = error.localizedDescription
             }
         })
     }
     
-    func didLoadNextPage() {
+    func loadNextPage() {
         loadProducts(loading: .nextPage)
     }
+    
 }

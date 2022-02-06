@@ -14,9 +14,12 @@ protocol ProductListUseCase {
 final class ProductListProvider: ProductListUseCase {
     
     func loadData(completion: @escaping ((Result<[Product], NetworkError>) -> Void)) {
-        
-        Api().fetchData(request: ProductListAPI.products,
-                        mappingClass: [Product].self,
-                        completion: completion)
+        if NetworkMonitor.shared.netOn {
+            Api().fetchData(request: ProductListAPI.products,
+                            mappingClass: [Product].self,
+                            completion: completion)
+        }else {
+            
+        }
     }
 }

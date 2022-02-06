@@ -33,6 +33,7 @@
 		1FEBBCD427B046C500B6B5E9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBBCD327B046C500B6B5E9 /* Observable.swift */; };
 		1FEBBCD627B04D9500B6B5E9 /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBBCD527B04D9500B6B5E9 /* UIImageView+Ext.swift */; };
 		1FEBBCD827B05DDB00B6B5E9 /* PinterestFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBBCD727B05DDB00B6B5E9 /* PinterestFlowLayout.swift */; };
+		1FEBBCDA27B0802E00B6B5E9 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBBCD927B0802E00B6B5E9 /* NetworkReachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		1FEBBCD327B046C500B6B5E9 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		1FEBBCD527B04D9500B6B5E9 /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		1FEBBCD727B05DDB00B6B5E9 /* PinterestFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestFlowLayout.swift; sourceTree = "<group>"; };
+		1FEBBCD927B0802E00B6B5E9 /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +133,7 @@
 		1FC93B8627AF2212003A1404 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				1FC93B8727AF222F003A1404 /* ProductCollectionViewCell.swift */,
-				1FC93B8827AF222F003A1404 /* ProductCollectionViewCell.xib */,
+				1FEBBCDB27B0845B00B6B5E9 /* ProductCollectionViewCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -154,6 +155,7 @@
 				1FC93B9527AF2630003A1404 /* NetworkConstants.swift */,
 				1FC93B9427AF2630003A1404 /* NetworkError.swift */,
 				1FC93B9627AF2630003A1404 /* Requestable.swift */,
+				1FEBBCD927B0802E00B6B5E9 /* NetworkReachability.swift */,
 			);
 			path = ApiWrapper;
 			sourceTree = "<group>";
@@ -247,6 +249,15 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		1FEBBCDB27B0845B00B6B5E9 /* ProductCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				1FC93B8727AF222F003A1404 /* ProductCollectionViewCell.swift */,
+				1FC93B8827AF222F003A1404 /* ProductCollectionViewCell.xib */,
+			);
+			path = ProductCollectionViewCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -319,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FEBBCDA27B0802E00B6B5E9 /* NetworkReachability.swift in Sources */,
 				1FC93BB227AF3049003A1404 /* LoadingShower.swift in Sources */,
 				1FC93B9C27AF2630003A1404 /* NetworkConstants.swift in Sources */,
 				1FEBBCD827B05DDB00B6B5E9 /* PinterestFlowLayout.swift in Sources */,

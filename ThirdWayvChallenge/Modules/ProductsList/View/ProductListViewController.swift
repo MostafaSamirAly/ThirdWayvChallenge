@@ -62,7 +62,7 @@ fileprivate extension ProductListViewController {
                 case .nextPage:
                     break
                 default:
-                    break
+                    self?.productsCollectionView.restore()
             }
         }
         viewModel.error.observe(on: self) { [weak self] in
@@ -74,13 +74,25 @@ fileprivate extension ProductListViewController {
 }
 
 
+
+
 extension ProductListViewController: UICollectionViewDelegate {
-   
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.items.value.count - 2 {
+            viewModel.loadNextPage()
+        }
+    }
 }
 
 extension ProductListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.items.value.count
+        if viewModel.isEmpty {
+            collectionView.setEmptyView(title: "", message: "No Products")
+            return 0
+        }else {
+            collectionView.restore()
+            return viewModel.items.value.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
