@@ -33,14 +33,10 @@ final class DefaultProductsListViewModel: ProductsListViewModel {
     private var productListUseCase: ProductListUseCase
     
     var items: Observable<[Product]> = Observable([])
-    
     var loading: Observable<ProductsListViewModelLoading?> = Observable(.none)
-    
     var error: Observable<String> = Observable("")
-    
     var isEmpty: Bool { return items.value.isEmpty }
-    
-    var shouldPaginate: Bool = true
+    var shouldPaginate: Bool = false
     
     
     init(productListUseCase: ProductListUseCase) {
@@ -53,7 +49,18 @@ final class DefaultProductsListViewModel: ProductsListViewModel {
             self?.loading.value = .noLoading
             switch result {
                 case .success(let products):
+                    self?.shouldPaginate = true
                     self?.items.value.append(contentsOf: products)
+                case .failure(let error):
+                    self?.error.value = error.localizedDescription
+            }
+        }, cache:  { [weak self] result in
+            self?.loading.value = .noLoading
+            switch result {
+                case .success(let products):
+                    self?.shouldPaginate = false
+                    self?.items.value = products
+                    self?.error.value = NetworkError.noInternet.localizedDescription
                 case .failure(let error):
                     self?.error.value = error.localizedDescription
             }
@@ -61,7 +68,8 @@ final class DefaultProductsListViewModel: ProductsListViewModel {
     }
     
     func loadNextPage() {
-        loadProducts(loading: .nextPage)
+        if shouldPaginate {
+            loadProducts(loading: .nextPage)
+        }
     }
-    
 }
