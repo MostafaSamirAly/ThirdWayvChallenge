@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F1FC76D27B2D3AB0019F89A /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1FC76C27B2D3AB0019F89A /* TransitionAnimator.swift */; };
+		1F1FC77227B2D5DE0019F89A /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1FC77027B2D5DD0019F89A /* ProductDetailsViewController.swift */; };
+		1F1FC77327B2D5DE0019F89A /* ProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1FC77127B2D5DE0019F89A /* ProductDetailsViewController.xib */; };
+		1F1FC77527B2D6890019F89A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1FC77427B2D6890019F89A /* RoundedButton.swift */; };
 		1F642B7427B0A00E00C74D5E /* ProductEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F642B7027B0A00E00C74D5E /* ProductEntity+CoreDataClass.swift */; };
 		1F642B7527B0A00E00C74D5E /* ProductEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F642B7127B0A00E00C74D5E /* ProductEntity+CoreDataProperties.swift */; };
 		1F642B7627B0A00E00C74D5E /* ImageEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F642B7227B0A00E00C74D5E /* ImageEntity+CoreDataClass.swift */; };
@@ -42,6 +46,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F1FC76C27B2D3AB0019F89A /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
+		1F1FC77027B2D5DD0019F89A /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
+		1F1FC77127B2D5DE0019F89A /* ProductDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailsViewController.xib; sourceTree = "<group>"; };
+		1F1FC77427B2D6890019F89A /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		1F642B7027B0A00E00C74D5E /* ProductEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1F642B7127B0A00E00C74D5E /* ProductEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1F642B7227B0A00E00C74D5E /* ImageEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -89,6 +97,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F1FC76E27B2D5900019F89A /* ProductList */ = {
+			isa = PBXGroup;
+			children = (
+				1FC93B8227AF21CE003A1404 /* ProductListViewController.swift */,
+				1FC93B8327AF21CE003A1404 /* ProductListViewController.xib */,
+			);
+			path = ProductList;
+			sourceTree = "<group>";
+		};
+		1F1FC76F27B2D5A10019F89A /* ProductDetails */ = {
+			isa = PBXGroup;
+			children = (
+				1F1FC77027B2D5DD0019F89A /* ProductDetailsViewController.swift */,
+				1F1FC77127B2D5DE0019F89A /* ProductDetailsViewController.xib */,
+			);
+			path = ProductDetails;
+			sourceTree = "<group>";
+		};
 		1FC93B5B27AF2118003A1404 = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +240,8 @@
 			isa = PBXGroup;
 			children = (
 				1FEBBCD727B05DDB00B6B5E9 /* PinterestFlowLayout.swift */,
+				1F1FC76C27B2D3AB0019F89A /* TransitionAnimator.swift */,
+				1F1FC77427B2D6890019F89A /* RoundedButton.swift */,
 			);
 			path = HelpingUI;
 			sourceTree = "<group>";
@@ -237,8 +265,8 @@
 		1FC93BA827AF2B19003A1404 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1FC93B8227AF21CE003A1404 /* ProductListViewController.swift */,
-				1FC93B8327AF21CE003A1404 /* ProductListViewController.xib */,
+				1F1FC76E27B2D5900019F89A /* ProductList */,
+				1F1FC76F27B2D5A10019F89A /* ProductDetails */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -341,6 +369,7 @@
 			files = (
 				1FC93B7727AF211A003A1404 /* LaunchScreen.storyboard in Resources */,
 				1FC93B8527AF21CE003A1404 /* ProductListViewController.xib in Resources */,
+				1F1FC77327B2D5DE0019F89A /* ProductDetailsViewController.xib in Resources */,
 				1FC93B8A27AF222F003A1404 /* ProductCollectionViewCell.xib in Resources */,
 				1FC93B7427AF211A003A1404 /* Assets.xcassets in Resources */,
 			);
@@ -354,7 +383,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FEBBCDA27B0802E00B6B5E9 /* NetworkReachability.swift in Sources */,
+				1F1FC76D27B2D3AB0019F89A /* TransitionAnimator.swift in Sources */,
 				1FC93BB227AF3049003A1404 /* LoadingShower.swift in Sources */,
+				1F1FC77527B2D6890019F89A /* RoundedButton.swift in Sources */,
+				1F1FC77227B2D5DE0019F89A /* ProductDetailsViewController.swift in Sources */,
 				1FC93B9C27AF2630003A1404 /* NetworkConstants.swift in Sources */,
 				1FEBBCD827B05DDB00B6B5E9 /* PinterestFlowLayout.swift in Sources */,
 				1FC93B9D27AF2630003A1404 /* Requestable.swift in Sources */,

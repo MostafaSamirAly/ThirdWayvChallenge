@@ -16,6 +16,7 @@ enum ProductsListViewModelLoading {
 protocol ProductsListViewModelInput {
     func loadProducts(loading: ProductsListViewModelLoading)
     func loadNextPage()
+    func selectAt(indexPath: IndexPath)
 }
 
 protocol MoviesListViewModelOutput {
@@ -23,6 +24,7 @@ protocol MoviesListViewModelOutput {
     var loading: Observable<ProductsListViewModelLoading?> { get }
     var error: Observable<String> { get }
     var isEmpty: Bool { get }
+    var selectedProduct: Product? { get }
 }
 
 protocol ProductsListViewModel: ProductsListViewModelInput, MoviesListViewModelOutput { }
@@ -37,6 +39,7 @@ final class DefaultProductsListViewModel: ProductsListViewModel {
     var error: Observable<String> = Observable("")
     var isEmpty: Bool { return items.value.isEmpty }
     var shouldPaginate: Bool = false
+    var selectedProduct: Product?
     
     
     init(productListUseCase: ProductListUseCase) {
@@ -71,5 +74,9 @@ final class DefaultProductsListViewModel: ProductsListViewModel {
         if shouldPaginate {
             loadProducts(loading: .nextPage)
         }
+    }
+    
+    func selectAt(indexPath: IndexPath) {
+        selectedProduct = items.value[indexPath.row]
     }
 }

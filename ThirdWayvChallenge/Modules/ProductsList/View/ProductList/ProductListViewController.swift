@@ -16,6 +16,8 @@ class ProductListViewController: UIViewController, AlertShower, LoadingShower {
     }
     
     let viewModel: ProductsListViewModel
+    let transition = TransitionAnimator()
+    private var selectedIndexPathCell: IndexPath?
     
     init(viewModel: ProductsListViewModel) {
         self.viewModel = viewModel
@@ -31,10 +33,7 @@ class ProductListViewController: UIViewController, AlertShower, LoadingShower {
         // Do any additional setup after loading the view.
         bindViewModel()
         viewModel.loadProducts(loading: .fullScreen)
-        
     }
-    
-
 }
 
 fileprivate extension ProductListViewController {
@@ -77,6 +76,15 @@ fileprivate extension ProductListViewController {
 
 
 extension ProductListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndexPathCell = indexPath
+        viewModel.selectAt(indexPath: indexPath)
+        let vc = ProductDetailsViewController()
+        vc.viewModel = viewModel
+        vc.transitioningDelegate = self
+        present(vc, animated: true)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == viewModel.items.value.count - 2 {
             viewModel.loadNextPage()
@@ -108,4 +116,23 @@ extension ProductListViewController: PinterestLayoutDelegate {
         return CGFloat(viewModel.items.value[indexPath.row].image.height)
     }
     
+}
+
+extension ProductListViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard
+            let selectedIndexPathCell = selectedIndexPathCell,
+            let selectedCell = productsCollectionView.cellForItem(at: selectedIndexPathCell) as? ProductCollectionViewCell
+        else {
+            return nil
+        }
+        transition.originFrame = productsCollectionView.convert(selectedCell.frame, to: nil)
+        transition.presenting = true
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.presenting = false
+        return transition
+    }
 }
