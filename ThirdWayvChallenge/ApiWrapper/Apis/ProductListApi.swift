@@ -42,4 +42,12 @@ enum ProductListAPI: Requestable {
                 return false
         }
     }
+    
+    var headers: [NetworkConstants.HTTPHeaderFieldKey :
+                    NetworkConstants.HTTPHeaderFieldValue]? {
+        switch self {
+            case .products:
+                return [.acceptType: .json]
+        }
+    }
 }

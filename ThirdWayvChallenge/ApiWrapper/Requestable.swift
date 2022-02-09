@@ -16,7 +16,7 @@ protocol Requestable {
     var path: String { get }
     var parameters: Parameters? { get }
     var urlParameters: Parameters? { get }
-    var headers: [String: String]? { get }
+    var headers: [NetworkConstants.HTTPHeaderFieldKey: NetworkConstants.HTTPHeaderFieldValue]? { get }
     var isWWWFormUrlEncoded: Bool? { get }
     var timeoutInterval: TimeInterval { get }
     func asURLRequest() throws -> URLRequest
@@ -36,7 +36,7 @@ extension Requestable {
         return nil
     }
     
-    var headers:[String:String]? {
+    var headers:[NetworkConstants.HTTPHeaderFieldKey: NetworkConstants.HTTPHeaderFieldValue]? {
         return nil
     }
     
@@ -49,13 +49,12 @@ extension Requestable {
     }
     
     var timeoutInterval: TimeInterval {
-        return 15
+        return 5
     }
     
     
     // MARK: - Methods
     func asURLRequest() throws -> URLRequest {
-        // Construct url
         let urlPath = baseURL + path
         
         guard let url = URL(string : urlPath.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) ?? urlPath) else { throw NetworkError.badAPIRequest }
@@ -65,7 +64,7 @@ extension Requestable {
                             forHTTPHeaderField: NetworkConstants.HTTPHeaderFieldKey.acceptType.rawValue)
         if headers != nil {
             for (key, value) in headers! {
-                urlRequest.setValue(value, forHTTPHeaderField: key)
+                urlRequest.setValue(value.rawValue, forHTTPHeaderField: key.rawValue)
             }
         }
         switch method {

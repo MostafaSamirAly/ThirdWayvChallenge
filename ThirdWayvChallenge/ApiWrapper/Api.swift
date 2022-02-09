@@ -16,8 +16,7 @@ class Api {
                                completion: @escaping (Result<T, Error>) -> Void) {
         do {
             let urlRequest = try request.asURLRequest()
-            
-            let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 if let error = error {
                     completion(.failure(NetworkError.unknown(message: error.localizedDescription)))
                 }else {
@@ -33,8 +32,7 @@ class Api {
                         completion(.failure(NetworkError.unknown(message: error.localizedDescription)))
                     }
                 }
-            }
-            task.resume()
+            }.resume()
         } catch {
             completion(.failure(NetworkError.unknown(message: error.localizedDescription)))
         }
