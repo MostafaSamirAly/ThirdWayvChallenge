@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 final class Observable<Value> {
     
     struct Observer<Value> {
@@ -15,21 +16,20 @@ final class Observable<Value> {
     }
     
     private var observers = [Observer<Value>]()
-    
     public var value: Value {
         didSet { notifyObservers() }
     }
     
-    public init(_ value: Value) {
+    init(_ value: Value) {
         self.value = value
     }
     
-    public func observe(on observer: AnyObject, observerBlock: @escaping (Value) -> Void) {
+    func observe(on observer: AnyObject, observerBlock: @escaping (Value) -> Void) {
         observers.append(Observer(observer: observer, block: observerBlock))
         observerBlock(self.value)
     }
     
-    public func remove(observer: AnyObject) {
+    func remove(observer: AnyObject) {
         observers = observers.filter { $0.observer !== observer }
     }
     

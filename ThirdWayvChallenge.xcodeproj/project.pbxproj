@@ -159,7 +159,7 @@
 		1FC93B7F27AF21AA003A1404 /* ProductsList */ = {
 			isa = PBXGroup;
 			children = (
-				1FC93BA827AF2B19003A1404 /* View */,
+				1FC93BA827AF2B19003A1404 /* Views */,
 				1FC93BA727AF2ADD003A1404 /* UseCase */,
 				1FC93BA527AF2AC8003A1404 /* ViewModel */,
 				1FC93B8627AF2212003A1404 /* Cells */,
@@ -262,13 +262,13 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
-		1FC93BA827AF2B19003A1404 /* View */ = {
+		1FC93BA827AF2B19003A1404 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				1F1FC76E27B2D5900019F89A /* ProductList */,
 				1F1FC76F27B2D5A10019F89A /* ProductDetails */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		1FC93BAB27AF2D89003A1404 /* Apis */ = {

@@ -13,8 +13,10 @@ class ProductDetailsViewController: UIViewController {
     var viewModel: ProductsListViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureUIData()
+    }
+    
+    func configureUIData() {
         guard let product = viewModel?.selectedProduct else { return }
         productImageView.setImage(with: product.image.url)
         productDescriptionLabel.text = product.productDescription

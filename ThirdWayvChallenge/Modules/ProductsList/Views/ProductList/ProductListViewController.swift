@@ -25,12 +25,12 @@ class ProductListViewController: UIViewController, AlertShower, LoadingShower {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.viewModel = DefaultProductsListViewModel(productListUseCase: ProductListProvider())
+        super.init()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         bindViewModel()
         viewModel.loadProducts(loading: .fullScreen)
     }
@@ -79,10 +79,10 @@ extension ProductListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndexPathCell = indexPath
         viewModel.selectAt(indexPath: indexPath)
-        let vc = ProductDetailsViewController()
-        vc.viewModel = viewModel
-        vc.transitioningDelegate = self
-        present(vc, animated: true)
+        let productDetails = ProductDetailsViewController()
+        productDetails.viewModel = viewModel
+        productDetails.transitioningDelegate = self
+        present(productDetails, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
