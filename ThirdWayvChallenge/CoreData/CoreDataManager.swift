@@ -19,11 +19,7 @@ final class CoreDataManager {
     static let shared = CoreDataManager()
     let managedContext: NSManagedObjectContext
     private init() {
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            managedContext = appDelegate.persistentContainer.viewContext
-        }else {
-            managedContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        }
+            managedContext = CoreDataConfiguration.shared.persistentContainer.viewContext
     }
     
     func fetchProducts() -> Result<[Product], Error> {

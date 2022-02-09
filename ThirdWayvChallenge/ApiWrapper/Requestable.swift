@@ -18,6 +18,7 @@ protocol Requestable {
     var urlParameters: Parameters? { get }
     var headers: [String: String]? { get }
     var isWWWFormUrlEncoded: Bool? { get }
+    var timeoutInterval: TimeInterval { get }
     func asURLRequest() throws -> URLRequest
 }
 
@@ -47,6 +48,10 @@ extension Requestable {
         return nil
     }
     
+    var timeoutInterval: TimeInterval {
+        return 15
+    }
+    
     
     // MARK: - Methods
     func asURLRequest() throws -> URLRequest {
@@ -74,7 +79,7 @@ extension Requestable {
                     try ParameterEncoding.jsonEncoding.encode(urlRequest: &urlRequest, parameters: parameters)
                 }
         }
-        debugPrint(urlRequest.url?.absoluteURL ?? "no url")
+        urlRequest.timeoutInterval = timeoutInterval
         return urlRequest
     }
 }
