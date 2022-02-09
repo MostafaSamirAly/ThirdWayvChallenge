@@ -14,6 +14,8 @@ enum ProductsListViewModelLoading {
 }
 
 protocol ProductsListViewModelInput {
+    var productListUseCase: ProductListUseCase { get } 
+    init(productListUseCase: ProductListUseCase)
     func loadProducts(loading: ProductsListViewModelLoading)
     func loadNextPage()
     func selectAt(indexPath: IndexPath)
@@ -32,7 +34,7 @@ protocol ProductsListViewModel: ProductsListViewModelInput, MoviesListViewModelO
 
 final class DefaultProductsListViewModel: ProductsListViewModel {
 
-    private var productListUseCase: ProductListUseCase
+    var productListUseCase: ProductListUseCase
     
     var items: Observable<[Product]> = Observable([])
     var loading: Observable<ProductsListViewModelLoading?> = Observable(.none)

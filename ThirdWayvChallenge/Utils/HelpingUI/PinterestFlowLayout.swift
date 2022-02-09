@@ -41,23 +41,22 @@ class PinterestLayout: UICollectionViewLayout {
             let photoHeight = delegate?.collectionView(
                 collectionView,
                 heightForPhotoAtIndexPath: indexPath) ?? 180
+            let height = photoHeight + 130
             let frame = CGRect(x: xOffset[column],
                                y: yOffset[column],
                                width: columnWidth,
-                               height: photoHeight)
+                               height: height)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             attributes.frame = frame
             cache.append(attributes)
             contentHeight = max(contentHeight, frame.maxY)
-            yOffset[column] = yOffset[column] + photoHeight
+            yOffset[column] = yOffset[column] + height
             column = column < (numberOfColumns - 1) ? (column + 1) : 0
         }
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var visibleLayoutAttributes: [UICollectionViewLayoutAttributes] = []
-        
-        // Loop through the cache and look for items in the rect
         for attributes in cache {
             if attributes.frame.intersects(rect) {
                 visibleLayoutAttributes.append(attributes)

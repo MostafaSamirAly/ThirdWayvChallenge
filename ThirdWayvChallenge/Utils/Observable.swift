@@ -25,7 +25,8 @@ final class Observable<Value> {
     }
     
     func observe(on observer: AnyObject, observerBlock: @escaping (Value) -> Void) {
-        observers.append(Observer(observer: observer, block: observerBlock))
+        let newObserver = Observer(observer: observer, block: observerBlock)
+        observers.append(newObserver)
         observerBlock(self.value)
     }
     

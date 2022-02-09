@@ -19,7 +19,9 @@ final class ProductListProvider: ProductListUseCase {
             switch result {
                 case .success(let products):
                     completion(.success(products))
-                    CoreDataManager.shared.insert(products: products)
+                    DispatchQueue.main.async {
+                        CoreDataManager.shared.insert(products: products)
+                    }
                 case .failure(let error):
                     completion(.failure(error))
                     switch CoreDataManager.shared.fetchProducts() {
