@@ -14,16 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        NetworkMonitor.shared.startMonitoring()
         return true
     }
-    
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        NetworkMonitor.shared.startMonitoring()
-    }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         NetworkMonitor.shared.stopMonitoring()
     }
-
 }
 

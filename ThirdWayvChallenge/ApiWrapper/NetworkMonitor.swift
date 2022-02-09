@@ -11,7 +11,7 @@ final class NetworkMonitor {
     static let shared = NetworkMonitor()
     private var monitor: NWPathMonitor
     private var queue = DispatchQueue.global()
-    var isConnected: Bool = true
+    var isConnected: Observable<Bool?> = Observable(nil)
  
     private init() {
         self.monitor = NWPathMonitor()
@@ -21,7 +21,7 @@ final class NetworkMonitor {
  
     func startMonitoring() {
         self.monitor.pathUpdateHandler = { [weak self] path in
-            self?.isConnected = path.status == .satisfied
+            self?.isConnected.value = path.status == .satisfied
         }
     }
  

@@ -50,11 +50,17 @@ final class DefaultProductsListViewModel: ProductsListViewModel {
     
     func loadProducts(loading: ProductsListViewModelLoading) {
         self.loading.value = loading
-        productListUseCase.loadData(completion: { [weak self] result in
+        productListUseCase.loadData(completion: { [weak self] result, isFromCache in
             self?.loading.value = .noLoading
             switch result {
                 case .success(let products):
-                    self?.items.value.append(contentsOf: products)
+                    if isFromCache,
+                       self?.shouldPaginate == false {
+                        self?.items.value = products
+                    }else {
+                        self?.items.value.append(contentsOf: products)
+                    }
+                    self?.shouldPaginate = !isFromCache
                 case .failure(let error):
                     self?.error.value = error.localizedDescription
             }

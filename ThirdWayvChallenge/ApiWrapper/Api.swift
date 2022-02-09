@@ -17,8 +17,8 @@ class Api {
         do {
             let urlRequest = try request.asURLRequest()
             URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-                if let error = error {
-                    completion(.failure(NetworkError.unknown(message: error.localizedDescription)))
+                if let _ = error {
+                    completion(.failure(NetworkError.noInternet))
                 }else {
                     guard let data = data else {
                         completion(.failure(NetworkError.badAPIRequest))
