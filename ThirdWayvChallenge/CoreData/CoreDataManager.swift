@@ -6,16 +6,9 @@
 //
 
 import CoreData
-import UIKit.UIApplication
-
-enum ProductEntityAttributes: String, CaseIterable {
-    case id
-    case image
-    case productDescription
-    case price
-}
 
 final class CoreDataManager {
+    
     static let shared = CoreDataManager()
     let managedContext: NSManagedObjectContext
     private init() {
@@ -26,7 +19,7 @@ final class CoreDataManager {
         let productsRequest = ProductEntity.fetchRequest()
         do {
             let retrievedData = try managedContext.fetch(productsRequest)
-                return .success(retrievedData.compactMap { Product(product:$0) })
+                return .success(retrievedData.compactMap { Product($0) })
         }catch {
             return .failure(error)
         }

@@ -13,7 +13,7 @@ struct Product: Codable {
     let image: Image
     let price: Int
     
-    init(product: ProductEntity) {
+    init(_ product: ProductEntity) {
         self.id = Int(product.id)
         self.productDescription = product.productDescription!
         self.price = Int(product.price)

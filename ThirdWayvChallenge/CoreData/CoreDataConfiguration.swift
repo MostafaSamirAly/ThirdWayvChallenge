@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  CoreDataConfiguration.swift
 //  ThirdWayvChallenge
 //
 //  Created by Mostafa Samir on 09/02/2022.

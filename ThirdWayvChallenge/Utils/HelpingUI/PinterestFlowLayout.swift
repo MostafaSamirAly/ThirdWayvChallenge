@@ -15,7 +15,6 @@ class PinterestLayout: UICollectionViewLayout {
     weak var delegate: PinterestLayoutDelegate?
     
     private let numberOfColumns = 2
-    private let cellPadding: CGFloat = 0
     private var cache: [UICollectionViewLayoutAttributes] = []
     private var contentHeight: CGFloat = 0
     private var contentWidth: CGFloat {
@@ -23,7 +22,7 @@ class PinterestLayout: UICollectionViewLayout {
             return 0
         }
         let insets = collectionView.contentInset
-        return collectionView.bounds.width - (insets.left + insets.right)
+        return collectionView.frame.width - (insets.left + insets.right)
     }
     override var collectionViewContentSize: CGSize {
         return CGSize(width: contentWidth, height: contentHeight)
@@ -42,17 +41,15 @@ class PinterestLayout: UICollectionViewLayout {
             let photoHeight = delegate?.collectionView(
                 collectionView,
                 heightForPhotoAtIndexPath: indexPath) ?? 180
-            let height = cellPadding * 2 + photoHeight
             let frame = CGRect(x: xOffset[column],
                                y: yOffset[column],
                                width: columnWidth,
-                               height: height)
-            let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+                               height: photoHeight)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-            attributes.frame = insetFrame
+            attributes.frame = frame
             cache.append(attributes)
             contentHeight = max(contentHeight, frame.maxY)
-            yOffset[column] = yOffset[column] + height
+            yOffset[column] = yOffset[column] + photoHeight
             column = column < (numberOfColumns - 1) ? (column + 1) : 0
         }
     }

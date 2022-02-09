@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F12DC3027B4481100F5D0B3 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F12DC2F27B4481100F5D0B3 /* CoreDataStorage.swift */; };
+		1F12DC3027B4481100F5D0B3 /* CoreDataConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F12DC2F27B4481100F5D0B3 /* CoreDataConfiguration.swift */; };
 		1F1FC76D27B2D3AB0019F89A /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1FC76C27B2D3AB0019F89A /* TransitionAnimator.swift */; };
 		1F1FC77227B2D5DE0019F89A /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1FC77027B2D5DD0019F89A /* ProductDetailsViewController.swift */; };
 		1F1FC77327B2D5DE0019F89A /* ProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1FC77127B2D5DE0019F89A /* ProductDetailsViewController.xib */; };
@@ -47,7 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1F12DC2F27B4481100F5D0B3 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		1F12DC2F27B4481100F5D0B3 /* CoreDataConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConfiguration.swift; sourceTree = "<group>"; };
 		1F1FC76C27B2D3AB0019F89A /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		1F1FC77027B2D5DD0019F89A /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		1F1FC77127B2D5DE0019F89A /* ProductDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailsViewController.xib; sourceTree = "<group>"; };
@@ -302,7 +302,7 @@
 		1FEBBCE127B08ACA00B6B5E9 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				1F12DC2F27B4481100F5D0B3 /* CoreDataStorage.swift */,
+				1F12DC2F27B4481100F5D0B3 /* CoreDataConfiguration.swift */,
 				1FEBBCE227B08ADF00B6B5E9 /* CoreDataManager.swift */,
 				1F642B7027B0A00E00C74D5E /* ProductEntity+CoreDataClass.swift */,
 				1F642B7127B0A00E00C74D5E /* ProductEntity+CoreDataProperties.swift */,
@@ -390,7 +390,7 @@
 				1FC93BB227AF3049003A1404 /* LoadingShower.swift in Sources */,
 				1F1FC77527B2D6890019F89A /* RoundedButton.swift in Sources */,
 				1F1FC77227B2D5DE0019F89A /* ProductDetailsViewController.swift in Sources */,
-				1F12DC3027B4481100F5D0B3 /* CoreDataStorage.swift in Sources */,
+				1F12DC3027B4481100F5D0B3 /* CoreDataConfiguration.swift in Sources */,
 				1FC93B9C27AF2630003A1404 /* NetworkConstants.swift in Sources */,
 				1FEBBCD827B05DDB00B6B5E9 /* PinterestFlowLayout.swift in Sources */,
 				1FC93B9D27AF2630003A1404 /* Requestable.swift in Sources */,
