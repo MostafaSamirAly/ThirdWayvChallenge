@@ -50,6 +50,8 @@ fileprivate extension ProductListViewController {
     
     func bindViewModel() {
         viewModel.items.observe(on: self) { [weak self] _ in
+            // dismiss alert if there is no internet connection first
+            self?.dismiss(animated: true)
             self?.productsCollectionView.reloadData()
         }
         viewModel.loading.observe(on: self) { [weak self] in

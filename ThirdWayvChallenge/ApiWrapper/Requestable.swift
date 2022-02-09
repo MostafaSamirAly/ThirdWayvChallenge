@@ -1,9 +1,8 @@
 //
 //  Requestable.swift
-//  ASMIO
+//  ThirdWayvChallenge
 //
 //  Created by Mostafa Samir on 18/11/21.
-//  Copyright © 2021 Mostafa Samir. All rights reserved.
 //
 
 import Foundation

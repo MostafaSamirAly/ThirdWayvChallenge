@@ -54,8 +54,7 @@ final class DefaultProductsListViewModel: ProductsListViewModel {
             self?.loading.value = .noLoading
             switch result {
                 case .success(let products):
-                    if isFromCache,
-                       self?.shouldPaginate == false {
+                    if self?.shouldPaginate == false {
                         self?.items.value = products
                     }else {
                         self?.items.value.append(contentsOf: products)
